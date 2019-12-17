@@ -17,6 +17,7 @@
     "@types/jasmine": "3.5.0",
     "@types/jasminewd2": "2.0.8",
     "@types/node": "12.12.16",
+    "filepond": "^4.9.2",
     "ng-zorro-antd": "8.5.2",
     "rxjs": "6.5.3",
     "tslib": "1.10.0",
