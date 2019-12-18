@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FileUploadComponent } from './file-upload.component';
 import { Routes, RouterModule } from '@angular/router';
 import {SharedModule} from '../shared/shared.module'
+import { FilePondModule, registerPlugin } from 'ngx-filepond';
 
 const routes: Routes = [
 
@@ -14,7 +15,7 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [
-     CommonModule,RouterModule.forChild(routes),SharedModule
+     CommonModule,RouterModule.forChild(routes),SharedModule,FilePondModule
   ],
   declarations: [FileUploadComponent]
 })

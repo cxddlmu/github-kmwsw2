@@ -2,7 +2,7 @@
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item>
+      <li nz-menu-item [routerLink]="['/main']" routerLinkActive="active">
         <i nz-icon nzType="file"></i>
         <span>main page</span>
       </li>
@@ -21,7 +21,7 @@
       </li>
       <li nz-menu-item [routerLink]="['/fileUpload']" routerLinkActive="active">
         <i nz-icon nzType="file"></i>
-        <span>File</span>
+        <span>filepond</span>
       </li>
     </ul>
   </nz-sider>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
     import * as FilePond from 'filepond';
 
 @Component({
@@ -7,13 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
+  ngOnInit(): void {
+    throw new Error("Method not implemented.");
+  }
 
-  constructor() { }
+ 
+  @ViewChild('myPond',{static:false}) myPond: any;
 
-  ngOnInit() {
+  pondOptions = {
+    class: 'my-filepond',
+    multiple: true,
+    labelIdle: 'Drop files here',
+    acceptedFileTypes: 'image/jpeg, image/png'
+  }
 
-const inputElement = document.querySelector('input[type="file"]');
-const pond = FilePond.create( inputElement );
+  pondFiles = [
+    'index.html'
+  ]
+
+  pondHandleInit() {
+    console.log('FilePond has initialised', this.myPond);
+  }
+
+  pondHandleAddFile(event: any) {
+    console.log('A file was added', event);
   }
 
 }
