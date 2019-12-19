@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
     import * as FilePond from 'filepond';
+// Import the plugin code
+import FilePondPluginFileRename from 'filepond-plugin-file-rename';
+
+// Register the plugin
+FilePond.registerPlugin(FilePondPluginFileRename);
 
 @Component({
   selector: 'app-file-upload',
@@ -17,7 +22,10 @@ export class FileUploadComponent implements OnInit {
     class: 'my-filepond',
     multiple: true,
     labelIdle: 'Drop files here',
-    acceptedFileTypes: 'image/jpeg, image/png'
+    acceptedFileTypes: 'image/jpeg, image/png',
+    fileRenameFunction: (file) => {
+        return `my_new_name${file.extension}`;
+    }
   }
 
   pondFiles = [
@@ -29,7 +37,15 @@ export class FileUploadComponent implements OnInit {
   }
 
   pondHandleAddFile(event: any) {
-    console.log('A file was added', event);
+    type fileData={
+      [filename:string]:string
+    }
+    let file:fileData={};
+
+    file=event.pond.getFile().filename
+    console.log('A file was added', event.pond.getFile());
+    console.log('A file was added', event.pond.getFile().filename);
+    console.log('A file was added', file);
   }
 
 }
