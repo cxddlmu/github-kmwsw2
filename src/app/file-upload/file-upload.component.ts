@@ -10,18 +10,27 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 
 // Register the plugin
 FilePond.registerPlugin(FilePondPluginFileEncode);
+
+// Import the plugin code
+import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
+
+// Import the plugin styles
+import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
+
+// Register the plugin
+FilePond.registerPlugin(FilePondPluginFilePoster);
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
-  ngOnInit(): void {
-  }
+
 
  
   @ViewChild('myPond',{static:false}) myPond: any;
-
+  ngOnInit(): void {
+  }
   pondOptions = {
     class: 'my-filepond',
     multiple: true,
@@ -29,7 +38,30 @@ export class FileUploadComponent implements OnInit {
     acceptedFileTypes: 'image/jpeg, image/png',
     fileRenameFunction: (file) => {
         return `my_new_name${file.extension}`;
-    }
+    },
+    files: [
+        {
+            // the server file reference
+            source: '12345',
+
+            // set type to local to indicate an already uploaded file
+            options: {
+                type: 'local',
+
+                // stub file information
+                file: {
+                    name: 'my-file.png',
+                    size: 3001025,
+                    type: 'image/png'
+                },
+
+                // pass poster property
+                metadata: {
+                    poster: './poster-image/file.png'
+                }
+            }
+        }
+    ]
   }
 
   pondFiles = [

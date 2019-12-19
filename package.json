@@ -21,6 +21,7 @@
     "@types/node": "12.12.16",
     "filepond": "^4.9.2",
     "filepond-plugin-file-encode": "^2.1.4",
+    "filepond-plugin-file-poster": "^2.2.0",
     "filepond-plugin-file-rename": "^1.1.4",
     "ng-zorro-antd": "8.5.2",
     "ngx-filepond": "^5.0.1",
