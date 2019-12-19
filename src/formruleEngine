@@ -1,0 +1,748 @@
+import { AbstractControl, FormGroup, FormArray, FormControl, Validators } from "@angular/forms";
+
+import * as _ from 'lodash'
+import { Injectable } from "@angular/core";
+import { Engine, Rule } from "json-rules-engine";
+import format from "string-format";
+import { takeUntil, filter } from "rxjs/operators";
+import { Subject, forkJoin } from "rxjs";
+/**
+ * rule form validate when init we should not do the value change listen operation,because it is very dangerous.
+ * static value--gender
+ * dynamic value--computed customertitle 
+ * cvt change:cvt filter
+ * default value
+ * mandatory
+ * length
+ * disabled
+ * unique array item
+ * across component communicate
+ * 
+ */
+
+// export function isRequiredField(field: FormControl) {
+//     if (!field.validator) {
+//         return false;
+//     }
+
+//     const validator = field.validator({} as AbstractControl);
+//     return (validator && validator.required);
+// }
+export const MATCH_ANY_OTHER = '_ANY_OTHER_'
+export const CROSS_COMPONENT = '_CROSS_COMPONENT_'
+export const CALLBACK = '_CALLBACK_'
+
+/**
+  * iterate form and handle the formcontrol by callback function
+  * @param ctrl 
+  * @param ctrlVal 
+  * @param callback 
+  *    * formgroup---ctrlKey(type:primitive,array)
+  *          |--ctrlKey--formArray--formgroup---ctrlKey(type:primitive,array,json)
+  *          |--ctrlKey--formgroup--ctrlKey
+  * 
+  * change callback into subject
+  */
+
+
+export type Record<K extends keyof any, T> = {
+    [P in K]: T;
+};
+
+@Injectable({
+    providedIn: 'root'
+})
+export class FormRuleEngine {
+
+    constructor() {
+
+
+    }
+    countryCode = 'SG'//through service acquire value
+    applicantRole = "AH"//through service 
+    public iterateForm(formCtrl: AbstractControl, formCtrlKey = null, formCtrlVal: any, triggeredPath: Array<any>, callbackList?: Function[]) {
+        if (formCtrl instanceof FormGroup) {
+            if (_.isEmpty(formCtrlVal)) {
+                formCtrlVal = {};
+            }
+
+            for (let formCtrlKey in formCtrl.controls) {
+                triggeredPath.push(formCtrlKey);
+                this.iterateForm(formCtrl.get(formCtrlKey), formCtrlKey, formCtrlVal[formCtrlKey], triggeredPath, callbackList);
+            }
+        } else if (formCtrl instanceof FormArray) {
+            let index: number = 0;
+            let formArrayCtrl: FormArray = formCtrl;
+            if (Array.isArray(formCtrlVal) && formCtrlVal.length > 0) {
+                for (let ctrl of formCtrlVal) {
+                    triggeredPath.push(index);
+                    let formArrayCtrlCnt = formArrayCtrl.controls.length - 1;
+                    if (formArrayCtrlCnt < index) {
+                        formArrayCtrl.push(new FormGroup(formArrayCtrl.at(0).value));//form init value
+                    }
+                    this.iterateForm(formArrayCtrl.at(index), null, ctrl, triggeredPath, callbackList);
+                    index++;
+                }
+            } else {
+                for (let ctrl of formArrayCtrl.controls) {
+                    triggeredPath.push(index);
+                    this.iterateForm(formArrayCtrl.at(index), null, ctrl, triggeredPath, callbackList);
+                    index++;
+                }
+            }
+        } else {
+            for (let callback of callbackList) {
+                if (_.isFunction(callback)) {
+                    callback(formCtrl, formCtrlKey, formCtrlVal, triggeredPath);
+                }
+            }
+        }
+    }
+
+
+    public isFormGroup(abstractControl: any): abstractControl is FormGroup {
+        return abstractControl;
+    }
+    public calErrorCnt(formGroup: FormGroup) {
+        let errorCnt = 0;
+        let callbackList = [];
+        let callback = (formCtrl: FormControl, formCtrlKey, formCtrlVal, triggeredFormCtrlKeyPaths) => {
+            // let [triggeredFormCtrlKeyPath, indexVals] = this.formatOriginalFormCtrlKeyPath(triggeredFormCtrlKeyPaths);
+            // this.debug(formCtrlKey + "---" + formCtrl.valid);
+            if (!formCtrl.valid && formCtrl.errors) {
+                errorCnt++;
+                console.debug(formCtrl);
+            }
+            // formCtrl.valid ? errorCnt : errorCnt++;
+            // if (this.formConfig && this.formConfig[triggeredFormCtrlKeyPath]) {
+            //     this.formConfig[triggeredFormCtrlKeyPath]['hasError'] = !formCtrl.valid;
+            // }
+        };
+        callbackList.push(callback);
+        for (let formCtrlKey in formGroup.controls) {
+            this.iterateForm(formGroup.get(formCtrlKey), formCtrlKey, null, [formCtrlKey], callbackList);
+        }
+        return errorCnt;
+    }
+
+    engineMapByComponent = {};
+    private filterRuleConfig(ruleConfig, sourceFormControlKey) {
+        let sourceFormControlKeyRuleConfig = ruleConfig[sourceFormControlKey];
+        if (!sourceFormControlKeyRuleConfig) {
+            sourceFormControlKeyRuleConfig = ruleConfig[this.countryCode] && ruleConfig[this.countryCode][sourceFormControlKey];
+            if (!sourceFormControlKeyRuleConfig) {
+                sourceFormControlKeyRuleConfig = ruleConfig[this.countryCode] && ruleConfig[this.countryCode][this.applicantRole] && ruleConfig[this.countryCode][this.applicantRole][sourceFormControlKey];
+                if (!sourceFormControlKeyRuleConfig) {
+                    return;
+                }
+            }
+        }
+        return sourceFormControlKeyRuleConfig;
+    }
+    private execRule(sourceFormControlKey, formgroup: FormGroup, ruleConfig: any, controlsConfig, componentName) {
+        /**
+     * Setup a new engine
+     * if()
+     */
+
+        const sourceFormControlKeyRuleConfig = this.filterRuleConfig(ruleConfig, sourceFormControlKey);
+        if (!sourceFormControlKeyRuleConfig) {
+            return;
+        }
+        if (!this.engineMapByComponent[componentName]) {
+            this.engineMapByComponent[componentName] = new Engine();
+            // define a rule for detecting the player has exceeded foul limits.  Foul out any player who:
+            // (has committed 5 fouls AND game is 40 minutes) OR (has committed 6 fouls AND game is 48 minutes)
+        }
+        let engine = this.engineMapByComponent[componentName]
+        //the reason why i implement it like this , synchronize it 
+        //create more engine we can asynchronize,
+        let startEngine = (sourceFormControlKey, sourceFormControlKeyRuleConfig) => {
+            return new Promise(resolve => {
+                let rule = new Rule(sourceFormControlKeyRuleConfig);
+                engine.addRule(rule)
+                /**
+                 * Define facts the engine will use to evaluate the conditions above.
+                 * Facts may also be loaded asynchronously at runtime; see the advanced example below
+                 */
+                // let facts = {
+                //     personalFoulCount: 6,
+                //     gameDuration: 40
+                // }
+                // Run the engine to evaluate
+                engine.run(formgroup.getRawValue())
+                    .then(results => {
+                        // 'results' is an object containing successful events, and an Almanac instance containing facts
+                        // let data = results.almanac['factMap'].get(formControlKey)//
+                        let sourceFormControlValue = formgroup.getRawValue()[sourceFormControlKey]
+                        results.events.map(event => {
+                            Object.keys(event.params).forEach(targetFormControlKey => {
+                                this.renderRuleConfig(event, formgroup, targetFormControlKey, sourceFormControlKey, sourceFormControlValue, controlsConfig, componentName);
+                            })
+                        })
+                        engine.removeRule(rule);
+                        resolve();
+                    })
+            })
+        }
+        //one field can config multi rule object
+        let engineReadyList = [];
+        if (Array.isArray(sourceFormControlKeyRuleConfig) && sourceFormControlKeyRuleConfig.length > 0) {
+            for (let ruleConfig of sourceFormControlKeyRuleConfig) {
+                engineReadyList.push(startEngine(sourceFormControlKey, ruleConfig))
+            }
+            return forkJoin(engineReadyList).toPromise();
+        } else {
+            return startEngine(sourceFormControlKey, sourceFormControlKeyRuleConfig);
+        }
+        //multi condition contain many field check , how to check 
+        // return startEngine(sourceFormControlKey, sourceFormControlKeyRuleConfig);
+    }
+    private patchOrTriggerValue(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue, formgroup, params) {
+        if (params[targetFormControlKey]?.staticValue[CROSS_COMPONENT]) {
+            this.triggerValueChangeToOtherComponentForRuleConfig(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue);
+        } else {
+            formgroup?.get(targetFormControlKey)?.patchValue(targetFormControlValue);
+        }
+    }
+    private renderRuleConfig(event, formgroup: FormGroup, targetFormControlKey, sourceFormControlKey, sourceFormControlValue, controlsConfig, sourceComponentName) {
+        let params = event?.params
+        if (typeof params[targetFormControlKey] == 'function') {
+            params[targetFormControlKey](formgroup)
+        }
+        else if (params[targetFormControlKey].dynamicValue) {
+            formgroup.get(targetFormControlKey).patchValue(format(params[targetFormControlKey].dynamicValue[MATCH_ANY_OTHER], formgroup.getRawValue()))
+        } else if (params[targetFormControlKey].isDisabled) {
+            let targetFormControlValue = params[targetFormControlKey].isDisabled[sourceFormControlValue];
+            if (!targetFormControlValue) {
+                targetFormControlValue = params[targetFormControlKey].isDisabled[MATCH_ANY_OTHER];
+            }
+            if (params[targetFormControlKey][CROSS_COMPONENT]) {
+                this.triggerValueChangeToOtherComponentForRuleConfig(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue);
+            } else {
+                if (targetFormControlValue) {
+                    formgroup.get(targetFormControlKey).disable();
+                } else {
+                    formgroup.get(targetFormControlKey).enable();
+                }
+            }
+        }
+
+        else if (params[targetFormControlKey].staticValue) {
+            let fixedValue = params[targetFormControlKey]?.staticValue['value'];
+            let rangeValue = params[targetFormControlKey]?.staticValue['range'];
+            if (fixedValue) {
+                this.handleFixedValue(sourceComponentName, sourceFormControlKey, targetFormControlKey, sourceFormControlValue, formgroup, params, fixedValue)
+                // if (params[targetFormControlKey]?.staticValue[CROSS_COMPONENT]) {
+                //     this.triggerValueChangeToOtherComponentForRuleConfig(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue);
+                // } else {
+                //     formgroup.get(targetFormControlKey).patchValue(targetFormControlValue);
+                // }
+            }
+            else if (rangeValue) {
+                this.handleRangeValue(sourceComponentName, sourceFormControlKey, targetFormControlKey, sourceFormControlValue, formgroup, params, rangeValue)
+            }
+
+        } else if (params[targetFormControlKey].cvtValue) {
+            let item = params[targetFormControlKey].cvtValue[MATCH_ANY_OTHER].find(val => val.key == sourceFormControlValue)
+            if (item) {
+                formgroup.get(targetFormControlKey).patchValue(item.name)
+            }
+
+            // } else if (params[targetFormControlKey].display) {
+            //     let targetIsDisplay = params[targetFormControlKey]?.display[sourceFormControlValue];
+            //     if (typeof targetIsDisplay !== 'boolean') {
+            //         targetIsDisplay = params[targetFormControlKey]?.display[MATCH_ANY_OTHER];
+            //     }
+            // }
+
+        } else if (params[targetFormControlKey].required) {
+            let targetIsRequired = params[targetFormControlKey]?.required[sourceFormControlValue];
+            if (typeof targetIsRequired !== 'boolean') {
+                targetIsRequired = params[targetFormControlKey]?.required[MATCH_ANY_OTHER];
+            }
+            //record error
+            (formgroup.get(params[targetFormControlKey].arrayName) as FormArray).controls.forEach((targetFormControlKeySub, index) => {
+                let config = controlsConfig[params[targetFormControlKey].arrayName][targetFormControlKey];
+                const formControl = (formgroup.get(params[targetFormControlKey].arrayName) as FormArray).at(index).get(targetFormControlKey);
+                if (targetIsRequired) {
+                    formControl.setValidators([Validators.required]);
+                    if (!config[1]) {
+                        config[1] = [Validators.required];
+                    } else {
+                        (config[1] as Array<any>).push(Validators.required);
+                    }
+                    if (formControl.dirty) {
+                        formControl.updateValueAndValidity();
+                    }
+                } else {
+                    formControl.clearValidators();
+                    if (!config[1]) {
+                        config[1] = [];
+                    } else {
+                        config[1] = (config[1] as Array<any>).filter(val => val !== Validators.required);
+                    }
+                    // config[1] = (config[1] as Array<any>).filter(val => val !== Validators.required);
+                }
+                formControl.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+                // console.log((formgroup.get(params[targetFormControlKey].arrayName) as FormArray).at(index).get(targetFormControlKey)?.validator({} as AbstractControl)?.required);
+
+            })
+
+        } else if (params[targetFormControlKey].arrayName) {
+            this.renderRuleConfig(event, formgroup, targetFormControlKey, sourceFormControlKey, sourceFormControlValue, controlsConfig, sourceComponentName);
+        }
+    }
+    private handleFixedValue(sourceComponentName, sourceFormControlKey, targetFormControlKey, sourceFormControlValue, formgroup, params, fixedValue) {
+        let targetFormControlValue = fixedValue[sourceFormControlValue];
+        if (!targetFormControlValue) {
+            targetFormControlValue = fixedValue[MATCH_ANY_OTHER];
+        }
+        this.patchOrTriggerValue(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue, formgroup, params)
+    }
+    private handleRangeValue(sourceComponentName, sourceFormControlKey, targetFormControlKey, sourceFormControlValue, formgroup, params, rangeValue) {
+        Object.keys(rangeValue).forEach(val => {
+            let rangeArray = val?.split(',')?.length;
+            if (rangeArray == 2) {
+                let start = rangeArray[0]
+                let end = rangeArray[1];
+                let targetFormControlValue = "";
+                if (sourceFormControlValue >= start && sourceFormControlValue < end) {
+                    targetFormControlValue = rangeValue[val]
+
+                    // if (params[targetFormControlKey]?.staticValue[CROSS_COMPONENT]) {
+                    //     this.triggerValueChangeToOtherComponentForRuleConfig(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue);
+                    // } else {
+                    //     formgroup.get(targetFormControlKey).patchValue(targetFormControlValue);
+                    // }
+                } else if (rangeValue[MATCH_ANY_OTHER]) {
+                    targetFormControlValue = rangeValue[MATCH_ANY_OTHER];
+
+                    // if (params[targetFormControlKey]?.staticValue[CROSS_COMPONENT]) {
+                    //     this.triggerValueChangeToOtherComponentForRuleConfig(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue);
+                    // } else {
+                    //     formgroup?.get(targetFormControlKey)?.patchValue(targetFormControlValue);
+                    // }
+                }
+                this.patchOrTriggerValue(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue, formgroup, params)
+            }
+        })
+    }
+    //     engine
+    //         .run({ [formControlKey]: (this.identificationForm.get('identificationArray') as FormArray).at(formControlKeyIndex).get(formControlKey).value })
+    //         .then(results => {
+    //             // let data = results.almanac['factMap'].get(formControlKey)
+    //             let originalFormControlValue = (this.identificationForm.get('identificationArray') as FormArray).at(formControlKeyIndex).get(formControlKey).value
+    //             results.events.map(event => {
+    //                 Object.keys(event.params).forEach(targetFormControlKey => {
+    //                     if (event.params[targetFormControlKey].dynamicValue) {
+    //                         (this.identificationForm.get('identificationArray') as FormArray).at(formControlKeyIndex).get(targetFormControlKey).patchValue(format(event.params[targetFormControlKey].dynamicValue[this.matchAllToken], ((this.identificationForm.get('identificationArray') as FormArray).at(formControlKeyIndex) as FormGroup).getRawValue()))
+    //                     } else if (event.params[targetFormControlKey].staticValue) {
+    //                         let targetFormControlValue = event.params[targetFormControlKey].staticValue[originalFormControlValue];
+    //                         if (!targetFormControlValue) {
+    //                             targetFormControlValue = event.params[targetFormControlKey].staticValue[this.matchAllToken];
+    //                         }
+    //                         (this.identificationForm.get('identificationArray') as FormArray).at(formControlKeyIndex).get(targetFormControlKey).patchValue(targetFormControlValue);
+
+    //                     } else if (event.params[targetFormControlKey].cvtValue) {
+    //                         let item = event.params[targetFormControlKey].cvtValue[this.matchAllToken].find(val => val.key == originalFormControlValue)
+    //                         if (item) {
+    //                             (this.identificationForm.get('identificationArray') as FormArray).at(formControlKeyIndex).get(targetFormControlKey).patchValue(item.name)
+    //                         }
+    //                     }
+    //                 })
+
+    //             })
+    //             // 'results' is an object containing successful events, and an Almanac instance containing facts
+    //             // results.events.map(event => console.log(event.params.message))
+    //         })
+    // }
+    public refreshFormValueChangeListener(formArray: FormArray, ruleConfig, formArrayName: string, controlsConfig, componentName) {
+        let subject$ = this.formArrayNameMap.get(formArrayName)
+        if (subject$) {
+            subject$.next();
+        }
+
+        this.iterateFormArray(formArray, formArrayName, ruleConfig, controlsConfig, componentName)
+
+        // this.initFormValueChangeListener(formGroup, ruleConfig);
+    }
+    formArrayNameMap = new Map();
+    private iterateFormGroup(formGroup: FormGroup, ruleConfig, controlsConfig, componentName) {
+        Object.keys(formGroup.controls).forEach(formControlKey => {
+            const abstractControl: AbstractControl = formGroup.get(formControlKey);
+            if (abstractControl instanceof FormArray) {
+                this.iterateFormArray(abstractControl, formControlKey, ruleConfig, controlsConfig, componentName)
+            } else if (abstractControl instanceof FormControl) {
+                const formControl = (abstractControl as FormControl);
+                const subject = new Subject()
+                this.listenValueChange(formControl, formControlKey, formGroup, ruleConfig, subject, controlsConfig, componentName);
+                // formControl.valueChanges.subscribe((val) => {
+                //     this.execRule(formControlKey, formGroup, ruleConfig, controlsConfig);
+                // })
+            }
+        })
+    }
+
+    private iterateFormArray(formArray: FormArray, formArrayControlKey: string, ruleConfig: {}, controlsConfig, componentName) {
+        // const formArray = (abstractControl as FormArray);
+        const subject = new Subject()
+        this.formArrayNameMap.set(formArrayControlKey, subject);
+        Object.keys(formArray.controls).forEach(formControlKeyIndex => {
+            const formGroupSub: FormGroup = formArray.at(Number(formControlKeyIndex)) as FormGroup;
+            if (formGroupSub instanceof FormGroup) {
+                Object.keys(formGroupSub.controls).forEach(formControlKeySub => {
+                    const abstractControl: AbstractControl = formGroupSub.get(formControlKeySub);
+                    this.listenValueChange(abstractControl, formControlKeySub, formArray.at(Number(formControlKeyIndex)), ruleConfig, subject, controlsConfig, componentName);
+                    // abstractControl.valueChanges.pipe(takeUntil(subject)).subscribe((prev) => {
+                    //     this.execRule(formControlKeySub, formArray.at(Number(formControlKeyIndex)) as FormGroup, ruleConfig, controlsConfig);
+                    // })
+                })
+            }
+        })
+
+    }
+    private listenValueChange(formControl, formControlKey, formGroup, ruleConfig, subject, controlsConfig, componentName) {
+        formControl.valueChanges.pipe(takeUntil(subject)).subscribe(() => {
+            this.execRule(formControlKey, formGroup, ruleConfig, controlsConfig, componentName);
+        })
+    }
+    // listenNotArrayValueChange(formControl, formControlKey, formGroup, ruleConfig, controlsConfig, componentName) {
+    //     formControl.valueChanges.subscribe((val) => {
+    //         this.execRule(formControlKey, formGroup, ruleConfig, controlsConfig, componentName);
+    //     })
+    // }
+    /**
+     * multi component init will make the loading sequence wrong
+     * @param formGroup 
+     * @param ruleConfig 
+     * @param controlsConfig 
+     */
+    public async execRuleWhenInit(formGroup, ruleConfig, controlsConfig, componentName) {//because engine is single, so the rule nend to exec sync
+        for (let formControlKey of Object.keys(controlsConfig)) {
+            if (formGroup.get(formControlKey) instanceof FormGroup) {
+                this.execRuleWhenInit(formGroup.get(formControlKey), ruleConfig, controlsConfig[formControlKey], componentName)
+            }
+            await this.execRule(formControlKey, formGroup, ruleConfig, controlsConfig, componentName)
+        }
+    }
+    public initFormValueChangeListener(formGroup: FormGroup, ruleConfig, controlsConfig, componentName) {
+        this.iterateFormGroup(formGroup, ruleConfig, controlsConfig, componentName)
+        // Object.keys(formGroup.controls).forEach(formControlKey => {
+        //     const abstractControl: AbstractControl = formGroup.get(formControlKey);
+        //     if (abstractControl instanceof FormArray) {
+        //         const formArray = (abstractControl as FormArray);
+        //         const subject = new Subject()
+        //         this.formArrayNameMap.set(formControlKey, subject);
+        //         Object.keys(formArray.controls).forEach(formControlKeyIndex => {
+        //             const formGroupSub: FormGroup = formArray.at(Number(formControlKeyIndex)) as FormGroup;
+        //             if (formGroupSub instanceof FormGroup) {
+        //                 Object.keys(formGroupSub.controls).forEach(formControlKeySub => {
+        //                     const abstractControlSub: AbstractControl = formGroupSub.get(formControlKeySub);
+        //                     abstractControlSub.valueChanges.pipe(takeUntil(subject)).subscribe((prev) => {
+        //                         // console.log(formControlKey);
+        //                         // console.log(formArrayControlKey);
+        //                         // console.log(formControlKeyIndex);
+        //                         // console.log(prev);
+        //                         // console.log(curr);
+        //                         // tslint:disable-next-line: max-line-length
+        //                         this.initRule(formControlKeySub, (formGroup.get(formControlKey) as FormArray).at(Number(formControlKeyIndex)) as FormGroup, ruleConfig);
+        //                     })
+        //                 })
+        //             }
+        //         })
+        //     } else if (abstractControl instanceof FormControl) {
+        //         const formControl = (abstractControl as FormControl);
+        //         formControl.valueChanges.subscribe(([prev, curr]) => {
+        //             // console.log(formArrayControlKey);
+        //             // console.log(prev);
+        //             // console.log(curr);
+        //             this.initRule(formControlKey, formGroup, ruleConfig);
+        //         })
+        //     }
+        // })
+    }
+    crossComponentListenerMap = {}
+    formValueCache = {}
+    public listenValueChangeFromOtherComponent(sourceComponentName, sourceFormControlKey): Subject<any> {
+        const subject = this.crossComponentListenerMap[`${sourceComponentName}${sourceFormControlKey}`];
+        if (subject) {
+            return subject;
+        }
+        const valueChangeSubject = new Subject<any>();
+        this.crossComponentListenerMap[`${sourceComponentName}${sourceFormControlKey}`] = valueChangeSubject;
+        return valueChangeSubject;
+    }
+
+    public triggerValueChangeToOtherComponent(sourceComponentName: string, sourceFormControlKey: string, formControlValue: string) {
+        const subject = this.crossComponentListenerMap[`${sourceComponentName}${sourceFormControlKey}`];
+        if (subject) {
+            subject.next(formControlValue);
+        }
+    }
+    /**
+     * change the value in current component
+     * @param sourceComponentName 
+     * @param sourceFormControlKey 
+     * @param formgroup 
+     */
+    public listenValueChangeFromOtherComponentForRuleConfig(sourceComponentName, sourceFormControlKey, formgroup) {
+        let subject = this.crossComponentListenerMap[`${sourceComponentName}${sourceFormControlKey}`];
+        if (!subject) {
+            subject = new Subject<any>();
+            this.crossComponentListenerMap[`${sourceComponentName}${sourceFormControlKey}`] = subject;
+        }
+        subject.subscribe(val => {
+            let { targetFormControlKey, targetFormControlValue } = val;
+            formgroup.get(targetFormControlKey).patchValue(targetFormControlValue);
+        })
+    }
+    private triggerValueChangeToOtherComponentForRuleConfig(sourceComponentName, sourceFormControlKey, targetFormControlKey, targetFormControlValue) {
+        const subject = this.crossComponentListenerMap[`${sourceComponentName}${sourceFormControlKey}`];
+        if (subject) {
+            subject.next({ targetFormControlKey, targetFormControlValue });
+        }
+    }
+    private complexLogic() {
+
+    }
+
+}
+// interface ListenerMapType {
+//     [key: String]: Subject<any>
+// }
+
+
+
+
+/**
+formConfig = {
+        prefix: {
+            label: 'prefix',
+            options: this.contentService.getCVT('cvtPrefix'),
+            errorMsg: { required: "is required", minLength: 'minLength' },
+            defaultVal: "MR",
+            required: Validators.required
+
+        },
+        firstName: {
+            label: 'firstName',
+            options: [],
+            errorMsg: { required: "is required", minLength: 'minLength', maxLength: 'maxLength' },
+            maxLength: 25,
+            defaultVal: "0000"
+        },
+        lastName: {
+            label: 'lastName', maxLength: 25,
+        },
+        customerTitle: {
+            label: 'customerTitle', maxLength: 40,
+        },
+        aliasName: {
+            label: 'aliasName', isDisabled: true, maxLength: 25,
+        },
+        otherName: {
+            label: 'otherName', maxLength: 40
+        },
+        motherMaidenName: {
+            label: 'motherMaidenName', maxLength: 40, isDisabled: true
+        },
+        birthday: {
+            label: 'Date of Birth(DDMMYYYY)',
+        },
+        gender: {
+            label: 'gender',
+            options: this.contentService.getCVT('cvtGender')
+        },
+        spokenLanguage: {
+            label: 'spokenLanguage', options: this.contentService.getCVT('cvtLanguage')
+        },
+        correspondenceLanguage: {
+            label: 'correspondenceLanguage', options: this.contentService.getCVT('cvtLanguage')
+        },
+        maritalStatus: {
+            options: this.contentService.getCVT('cvtMaritalStatus')
+        },
+        saluteBy: {
+            defaultVal: 'S', options: this.contentService.getCVT('cvtSaluteBy')
+        },
+        residenceCountry: {
+            options: this.contentService.getCVT('cvtCountry')
+        },
+        permanentResident: {
+            options: this.contentService.getCVT('cvtCountry')
+        },
+        educationLevel: {
+            options: this.contentService.getCVT('cvtEducationLevel')
+        }
+
+    }
+    controlsConfig = {
+        prefix: [{ value: 'MR', disabled: false }, [this.formConfig.prefix.required]],
+        prefixName: [''],
+        firstName: [{ value: this.formConfig.firstName.defaultVal, disabled: false }, [Validators.required, Validators.maxLength(this.formConfig.firstName.maxLength)]],
+        lastName: ['', [Validators.required]],
+        customerTitle: [''],
+        saluteBy: [''],
+        aliasName: [{ value: '', disabled: this.formConfig.aliasName.isDisabled }, [Validators.required]],
+        otherName: [''],
+        motherMaidenName: [''],
+        birthday: [''],
+        spokenLanguage: [''],
+        correspondenceLanguage: [''],
+        gender: [''],
+        maritalStatus: [''],
+        birthCountry: [''],
+        birthCity: [''],
+        residenceCountry: [{ value: 'SG', disabled: false }],
+        permanentResident: [''],
+        existingCitigoldCustomer: [''],
+        existingCitigoldHomeCountry: [''],
+        localENName: [''],
+        localENSurName: [''],
+        localWithholdingTax: [''],
+        religion: [''],
+        educationLevel: [''],
+    }
+    ruleConfig = {
+        SG: {
+            AH: {
+                prefix: {
+                    conditions: {
+                        any: [
+                            {
+                                fact: 'prefix',
+                                operator: 'notEqual',
+                                value: ''
+                            }
+                        ]
+                    },
+                    event: {  // define the event to fire when the conditions evaluate truthy
+                        type: 'prefix',
+                        params: {
+                            gender: {
+                                staticValue: {
+                                    value: {
+                                        MR: 'M',
+                                        MISS: 'F',
+                                        [MATCH_ANY_OTHER]: 'U'
+                                    },
+                                }
+                            },
+                            otherName: {
+                                isDisabled: {
+                                    MR: true,
+                                    MISS: false
+                                }
+                            },
+                            prefixName: {
+                                cvtValue: {
+                                    [MATCH_ANY_OTHER]: this.contentService.getCVT('cvtPrefix')
+                                }
+                            },
+                            customerTitle: {
+                                dynamicValue: {
+                                    [MATCH_ANY_OTHER]: '{prefixName} {lastName} {firstName}'
+                                }
+
+                            }
+                        }
+                    }
+                },
+                firstName: {
+                    conditions: {
+                        any: [
+                            {
+                                fact: 'firstName',
+                                operator: 'notEqual',
+                                value: ''
+                            },
+                            {
+                                fact: 'firstName',
+                                operator: 'equal',
+                                value: ''
+                            }
+                        ]
+                    },
+                    event: {  // define the event to fire when the conditions evaluate truthy
+                        type: 'firstName',
+                        params: {
+                            customerTitle: {
+                                dynamicValue: {
+                                    [MATCH_ANY_OTHER]: '{prefixName} {lastName} {firstName}'
+                                }
+
+                            }
+                        }
+                    }
+                },
+                lastName:
+                [
+                    {
+                        conditions: {
+                            any: [
+                                {
+                                    fact: 'lastName',
+                                    operator: 'notEqual',
+                                    value: ''
+                                }
+                            ]
+                        },
+                        event: {  // define the event to fire when the conditions evaluate truthy
+                            type: 'lastName',
+                            params: {
+                                customerTitle: {
+                                    dynamicValue: {
+                                        [MATCH_ANY_OTHER]: '{prefixName} {lastName} {firstName}'
+                                    }
+                                },
+                                customerVIPType: {
+                                    staticValue: {
+                                        value: {
+                                            '1': '10',
+                                            '2': '02',
+                                        },
+                                        [CROSS_COMPONENT]: {
+                                            componentName: 'bank',
+                                        },
+                                        // range:{//range
+                                        //     '1,3':'1',
+                                        //     '1,39':'11',
+                                        // }
+                                    },
+    
+                                }
+                            }
+                        }
+                    },
+                    {
+                        conditions: {
+                            any: [
+                                {
+                                    fact: 'lastName',
+                                    operator: 'equal',
+                                    value: ''
+                                }
+                            ]
+                        },
+                        event: {  // define the event to fire when the conditions evaluate truthy
+                            type: 'lastName',
+                            params: {
+                                [CALLBACK]:(formgroup:FormGroup,extraParams)=>{
+                                    if(formgroup.get('firstName').value=='10'){
+                                        formgroup.get('otherName').patchValue('44444');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+
+
+
+            }
+        }
+    }
+
+
+*/
