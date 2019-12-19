@@ -25,6 +25,7 @@
     "filepond-plugin-file-rename": "^1.1.4",
     "filepond-plugin-image-exif-orientation": "^1.0.6",
     "filepond-plugin-image-preview": "^4.5.0",
+    "lozad": "^1.14.0",
     "ng-zorro-antd": "8.5.2",
     "ngx-filepond": "^5.0.1",
     "rxjs": "6.5.3",

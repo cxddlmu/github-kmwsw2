@@ -4,12 +4,16 @@ import { FileUploadComponent } from './file-upload.component';
 import { Routes, RouterModule } from '@angular/router';
 import {SharedModule} from '../shared/shared.module'
 import { FilePondModule, registerPlugin } from 'ngx-filepond';
+import { LozadComponent } from './lozad/lozad.component';
 
 const routes: Routes = [
 
   {
     path: '',
-    component:FileUploadComponent
+    component: FileUploadComponent,
+    children:[
+       { path: 'lozad', component: LozadComponent },
+    ]
   },
   
 ];
@@ -17,6 +21,6 @@ const routes: Routes = [
   imports: [
      CommonModule,RouterModule.forChild(routes),SharedModule,FilePondModule
   ],
-  declarations: [FileUploadComponent]
+  declarations: [FileUploadComponent, LozadComponent]
 })
 export class FileUploadModule { }

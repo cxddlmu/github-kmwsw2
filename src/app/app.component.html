@@ -6,10 +6,13 @@
         <i nz-icon nzType="file"></i>
         <span>main page</span>
       </li>
-      <li nz-submenu nzTitle="User" nzIcon="user">
+      <li nz-submenu nzTitle="Image" nzIcon="user">
         <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
+           <li nz-menu-item [routerLink]="['/fileUpload']" routerLinkActive="active">
+            <i nz-icon nzType="file"></i>
+            <span>filepond</span>
+          </li>
+          <li nz-menu-item [routerLink]="['/lozad']" routerLinkActive="active">lozad</li>
           <li nz-menu-item>Alex</li>
         </ul>
       </li>
@@ -19,10 +22,7 @@
           <li nz-menu-item>Team 2</li>
         </ul>
       </li>
-      <li nz-menu-item [routerLink]="['/fileUpload']" routerLinkActive="active">
-        <i nz-icon nzType="file"></i>
-        <span>filepond</span>
-      </li>
+     
     </ul>
   </nz-sider>
   <nz-layout>
