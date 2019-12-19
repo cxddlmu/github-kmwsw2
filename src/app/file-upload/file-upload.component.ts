@@ -6,6 +6,12 @@ import FilePondPluginFileRename from 'filepond-plugin-file-rename';
 // Register the plugin
 FilePond.registerPlugin(FilePondPluginFileRename);
 // Import the plugin code
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+
+// Register the plugin
+FilePond.registerPlugin(FilePondPluginImageExifOrientation);
+
+// Import the plugin code
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 
 // Register the plugin
@@ -23,8 +29,6 @@ FilePond.registerPlugin(FilePondPluginFilePoster);
 // Import the plugin code
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 
-// Import the plugin styles
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 // Register the plugin
 FilePond.registerPlugin(FilePondPluginImagePreview);
