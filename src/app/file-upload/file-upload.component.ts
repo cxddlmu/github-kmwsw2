@@ -19,6 +19,16 @@ import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
 
 // Register the plugin
 FilePond.registerPlugin(FilePondPluginFilePoster);
+
+// Import the plugin code
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+
+// Import the plugin styles
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+// Register the plugin
+FilePond.registerPlugin(FilePondPluginImagePreview);
+
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
