@@ -53,6 +53,7 @@ export class FileUploadComponent implements OnInit {
     fileRenameFunction: (file) => {
         return `my_new_name${file.extension}`;
     },
+    
     files: [
         {
             // the server file reference
