@@ -8,7 +8,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class FileUploadComponent implements OnInit {
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
   }
 
  
