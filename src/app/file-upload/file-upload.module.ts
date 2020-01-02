@@ -21,6 +21,6 @@ const routes: Routes = [
   imports: [
      CommonModule,RouterModule.forChild(routes),SharedModule,FilePondModule
   ],
-  declarations: [FileUploadComponent, LozadComponent]
+  declarations: [FileUploadComponent]
 })
 export class FileUploadModule { }

@@ -16,7 +16,10 @@ const routes: Routes = [
     path: 'fileUpload',
     loadChildren: () => import('./file-upload/file-upload.module').then(m => m.FileUploadModule)
   },
-
+  {
+    path: 'sectionOne',
+    loadChildren: () => import('./section-one/section-one.module').then(m => m.SectionOneModule)
+  },
 ];
 
 @NgModule({
