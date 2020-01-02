@@ -10,14 +10,19 @@ export class LozadComponent implements OnInit {
 
   ngOnInit() {
     
-    const el = document.querySelector("img");
-    const observer = lozad(el, {
-      load: function(el) {
-        console.log("loading element");
 
-        // Custom implementation to load an element
-        // e.g. el.src = el.getAttribute('data-src');
-      }
+  }
+
+  ngAfterViewInit(){
+        const el = document.querySelector("img");
+    const observer = lozad(el, {
+      threshold: 0.1,
+      load: function(el) {
+            el.src = el.getAttribute("data-src");
+            el.onload = function() {
+                console.log((el.localName.toUpperCase() + " " + el.getAttribute("data-index") + " lazy loaded."))
+            }
+        }
     });
     observer.observe();
   }
