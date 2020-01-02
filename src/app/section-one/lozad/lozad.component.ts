@@ -15,7 +15,7 @@ export class LozadComponent implements OnInit {
 
   ngAfterViewInit(){
         const el = document.querySelector("img");
-    const observer = lozad(el, {
+    const observer = lozad('.lozad', {
       threshold: 0.1,
       load: function(el) {
             el.src = el.getAttribute("data-src");

@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SectionOneComponent } from './section-one.component';
 import { Routes, RouterModule } from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
-import { LozadComponent } from './lozad/lozad.component'
+import { LozadComponent } from './lozad/lozad.component';
+import { PhotoviewerComponent } from './photoviewer/photoviewer.component'
 
 const routes: Routes = [
 
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: SectionOneComponent,
     children:[
        { path: 'lozad', component: LozadComponent },
+       { path: 'photoviewer', component: PhotoviewerComponent },
     ]
   },
   
@@ -20,6 +22,6 @@ const routes: Routes = [
   imports: [
     CommonModule,RouterModule.forChild(routes),SharedModule,
   ],
-  declarations: [SectionOneComponent, LozadComponent]
+  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent]
 })
 export class SectionOneModule { }
