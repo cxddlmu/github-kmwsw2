@@ -4,21 +4,18 @@ import PhotoViewer from "photoviewer";
 @Component({
   selector: "app-photoviewer",
   templateUrl: "./photoviewer.component.html",
-  styleUrls: ["./photoviewer.component.css"]
+  styleUrls: ["./photoviewer.component.scss"]
 })
 export class PhotoviewerComponent implements OnInit {
   constructor() {}
-
-  ngOnInit() {
-    // build images array
+  test($event){
+    $event.preventDefault();
+    console.log($event.target.src);
+ 
     var items = [
       {
-        src: "path/to/image1.jpg", // path to image
+        src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577963382225&di=4cd3e6f96659512e213c7a40370ce1cd&imgtype=0&src=http%3A%2F%2Fwww.people.com.cn%2Fmediafile%2Fpic%2F20200102%2F66%2F307688541549362682.jpg", // path to image
         title: "Image Caption 1" // If you skip it, there will display the original image name(image1)
-      },
-      {
-        src: "path/to/image2.jpg",
-        title: "Image Caption 2"
       }
     ];
 
@@ -31,5 +28,9 @@ export class PhotoviewerComponent implements OnInit {
 
     // Initialize the plugin
     var viewer = new PhotoViewer(items, options);
+  }
+  ngOnInit() {
+    // build images array
+    
   }
 }
