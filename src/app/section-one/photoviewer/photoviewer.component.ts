@@ -10,8 +10,7 @@ export class PhotoviewerComponent implements OnInit {
   constructor() {}
   test($event){
     $event.preventDefault();
-    console.log($event.target.src);
- 
+    console.log($event.target);
     var items = [
       {
         src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577963382225&di=4cd3e6f96659512e213c7a40370ce1cd&imgtype=0&src=http%3A%2F%2Fwww.people.com.cn%2Fmediafile%2Fpic%2F20200102%2F66%2F307688541549362682.jpg", // path to image
