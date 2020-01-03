@@ -11,7 +11,6 @@ export class LozadComponent implements OnInit {
   ngOnInit() {
      const el = document.querySelector("img");
     const observer = lozad('.lozad', {
-      rootMargin: '110px 110px 110px 110px',
       load: function(el) {
             el.src = el.getAttribute("data-src");
             el.onload = function() {
