@@ -1,6 +1,6 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo"></div>
+    <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19z" fill="rgba(231,76,60,1)"/></svg></div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-menu-item [routerLink]="['/main']" routerLinkActive="active">
         <i nz-icon nzType="file"></i>
@@ -16,9 +16,11 @@
           <li nz-menu-item>Alex</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Section One" nzIcon="">
+
+      <li nz-submenu nzTitle="Section One" nzIcon="info-circle" >
         <ul>
-          <li nz-menu-item [routerLink]="['/sectionOne/lozad']" routerLinkActive="active">Lozad</li>
+
+ <li nz-menu-item [routerLink]="['/sectionOne/lozad']" routerLinkActive="active">Lozad</li>
           <li nz-menu-item [routerLink]="['/sectionOne/photoviewer']" routerLinkActive="active">photoviewer</li>
         </ul>
       </li>
