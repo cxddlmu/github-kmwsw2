@@ -9,14 +9,9 @@ export class LozadComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    
-
-  }
-
-  ngAfterViewInit(){
-        const el = document.querySelector("img");
+     const el = document.querySelector("img");
     const observer = lozad('.lozad', {
-      threshold: 0.1,
+      rootMargin: '110px 110px 110px 110px',
       load: function(el) {
             el.src = el.getAttribute("data-src");
             el.onload = function() {
@@ -25,5 +20,10 @@ export class LozadComponent implements OnInit {
         }
     });
     observer.observe();
+
+  }
+
+  ngAfterViewInit(){
+       
   }
 }
