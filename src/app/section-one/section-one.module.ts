@@ -15,6 +15,7 @@ const routes: Routes = [
     children:[
        { path: 'lozad', component: LozadComponent },
        { path: 'photoviewer', component: PhotoviewerComponent },
+       { path: 'editorJS', component: EditorJSComponent },
     ]
   },
   
