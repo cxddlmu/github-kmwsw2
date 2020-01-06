@@ -4,7 +4,8 @@ import { SectionOneComponent } from './section-one.component';
 import { Routes, RouterModule } from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import { LozadComponent } from './lozad/lozad.component';
-import { PhotoviewerComponent } from './photoviewer/photoviewer.component'
+import { PhotoviewerComponent } from './photoviewer/photoviewer.component';
+import { EditorJSComponent } from './editor-js/editor-js.component'
 
 const routes: Routes = [
 
@@ -22,6 +23,6 @@ const routes: Routes = [
   imports: [
     CommonModule,RouterModule.forChild(routes),SharedModule,
   ],
-  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent]
+  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent]
 })
 export class SectionOneModule { }
