@@ -17,6 +17,7 @@ const routes: Routes = [
        { path: 'lozad', component: LozadComponent },
        { path: 'photoviewer', component: PhotoviewerComponent },
        { path: 'editorJS', component: EditorJSComponent },
+       { path: 'cleavejs', component: CleavejsComponent },
     ]
   },
   
