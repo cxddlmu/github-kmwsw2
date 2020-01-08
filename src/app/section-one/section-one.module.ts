@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { SectionOneComponent } from './section-one.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -8,6 +8,7 @@ import { PhotoviewerComponent } from './photoviewer/photoviewer.component';
 import { EditorJSComponent } from './editor-js/editor-js.component';
 import { CleavejsComponent } from './cleavejs/cleavejs.component';
 import { CssDoodleComponent } from './css-doodle/css-doodle.component'
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 const routes: Routes = [
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   imports: [
     CommonModule,RouterModule.forChild(routes),SharedModule,
   ],
-  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent]
+  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SectionOneModule { }
