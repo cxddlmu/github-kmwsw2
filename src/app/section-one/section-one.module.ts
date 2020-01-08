@@ -19,6 +19,7 @@ const routes: Routes = [
        { path: 'photoviewer', component: PhotoviewerComponent },
        { path: 'editorJS', component: EditorJSComponent },
        { path: 'cleavejs', component: CleavejsComponent },
+       { path: 'cssDoodle', component: CssDoodleComponent },
     ]
   },
   
