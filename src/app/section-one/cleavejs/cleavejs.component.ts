@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Cleave from 'cleave.js';
 
 @Component({
   selector: 'app-cleavejs',
