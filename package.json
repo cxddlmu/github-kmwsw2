@@ -22,6 +22,7 @@
     "@types/jasmine": "3.5.0",
     "@types/jasminewd2": "2.0.8",
     "@types/node": "12.12.16",
+    "cleave.js": "^1.5.3",
     "filepond": "4.9.2",
     "filepond-plugin-file-encode": "2.1.4",
     "filepond-plugin-file-poster": "2.2.0",
