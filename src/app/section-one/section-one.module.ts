@@ -6,7 +6,8 @@ import {SharedModule} from '../shared/shared.module';
 import { LozadComponent } from './lozad/lozad.component';
 import { PhotoviewerComponent } from './photoviewer/photoviewer.component';
 import { EditorJSComponent } from './editor-js/editor-js.component';
-import { CleavejsComponent } from './cleavejs/cleavejs.component'
+import { CleavejsComponent } from './cleavejs/cleavejs.component';
+import { CssDoodleComponent } from './css-doodle/css-doodle.component'
 
 const routes: Routes = [
 
@@ -26,6 +27,6 @@ const routes: Routes = [
   imports: [
     CommonModule,RouterModule.forChild(routes),SharedModule,
   ],
-  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent]
+  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent]
 })
 export class SectionOneModule { }
