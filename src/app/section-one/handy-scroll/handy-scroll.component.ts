@@ -14,8 +14,7 @@ export class HandyScrollComponent implements OnInit {
   }
   ngAfterViewInit(){
     let handscrollsContainer = document.getElementById("handscrolls");
-    let handscrolls = handscrollsContainer.getElementsByTagName("img");
-    handscrollsContainer.scrollLeft = handscrollsContainer.scrollWidth;
+    // let handscrolls = handscrollsContainer.getElementsByTagName("img");
     // Widget initialization
     handyScroll.mount(handscrollsContainer);
 
