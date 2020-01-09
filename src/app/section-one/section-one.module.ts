@@ -22,6 +22,7 @@ const routes: Routes = [
        { path: 'editorJS', component: EditorJSComponent },
        { path: 'cleavejs', component: CleavejsComponent },
        { path: 'cssDoodle', component: CssDoodleComponent },
+       { path: 'handyScroll', component: HandyScrollComponent },
     ]
   },
   
