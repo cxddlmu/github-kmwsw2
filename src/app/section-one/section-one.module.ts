@@ -9,6 +9,7 @@ import { EditorJSComponent } from './editor-js/editor-js.component';
 import { CleavejsComponent } from './cleavejs/cleavejs.component';
 import { CssDoodleComponent } from './css-doodle/css-doodle.component'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HandyScrollComponent } from './handy-scroll/handy-scroll.component';
 
 const routes: Routes = [
 
@@ -29,7 +30,7 @@ const routes: Routes = [
   imports: [
     CommonModule,RouterModule.forChild(routes),SharedModule,
   ],
-  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent],
+  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent, HandyScrollComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SectionOneModule { }
