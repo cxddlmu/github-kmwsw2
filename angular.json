@@ -59,8 +59,8 @@
               "node_modules/filepond/dist/filepond.min.css",
               "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css",
               "node_modules/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css",
-              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
-              "./node_modules/froala-editor/css/froala_style.min.css"
+              "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "node_modules/froala-editor/css/froala_style.min.css"
             ],
             "scripts": []
           },
