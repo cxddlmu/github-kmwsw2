@@ -49,7 +49,7 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/froala-editor/js",
-                "output": "js"
+                "output": "/assets/js/"
               }
             ],
             "styles": [
