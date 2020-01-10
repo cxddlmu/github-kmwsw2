@@ -11,6 +11,7 @@ import { CssDoodleComponent } from './css-doodle/css-doodle.component'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HandyScrollComponent } from './handy-scroll/handy-scroll.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { FroalaEditorComponent } from './froala-editor/froala-editor.component';
 const routes: Routes = [
 
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
   imports: [
     CommonModule,RouterModule.forChild(routes),SharedModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot() 
   ],
-  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent, HandyScrollComponent],
+  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent, HandyScrollComponent, FroalaEditorComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SectionOneModule { }
