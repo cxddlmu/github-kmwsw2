@@ -14,14 +14,14 @@ import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
     // FormRuleEngineComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, HttpClientJsonpModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, ScrollingModule, DragDropModule,
-    AppRoutingModule, SharedModule
+    AppRoutingModule, SharedModule 
   ],
   exports: [
 
