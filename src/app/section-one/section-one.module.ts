@@ -24,6 +24,7 @@ const routes: Routes = [
        { path: 'cleavejs', component: CleavejsComponent },
        { path: 'cssDoodle', component: CssDoodleComponent },
        { path: 'handyScroll', component: HandyScrollComponent },
+       { path: 'froalaEditor', component: FroalaEditorComponent },
     ]
   },
   
