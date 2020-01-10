@@ -10,7 +10,7 @@ import { CleavejsComponent } from './cleavejs/cleavejs.component';
 import { CssDoodleComponent } from './css-doodle/css-doodle.component'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HandyScrollComponent } from './handy-scroll/handy-scroll.component';
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 const routes: Routes = [
 
   {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [
-    CommonModule,RouterModule.forChild(routes),SharedModule,
+    CommonModule,RouterModule.forChild(routes),SharedModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot() 
   ],
   declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent, HandyScrollComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
