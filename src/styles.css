@@ -2,4 +2,6 @@
 @import "~ng-zorro-antd/button/style/index.min.css"; /* Import styles of the component */
 
 @import "~ag-grid-community/dist/styles/ag-grid.css";
-@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+@import "~ag-grid-community/dist/styles/ag-theme-material.css";
+
+
