@@ -15,6 +15,7 @@ import { FroalaEditorModule } from 'angular-froala-wysiwyg/editor/editor.module.
 import { FroalaViewModule } from 'angular-froala-wysiwyg/view/view.module.js';
 
 import { AgGridModule } from 'ag-grid-angular';
+import { AgGridComponent } from './ag-grid/ag-grid.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,7 @@ const routes: Routes = [
   imports: [
     CommonModule,RouterModule.forChild(routes),SharedModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),AgGridModule.withComponents([])
   ],
-  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent, HandyScrollComponent, FroalaEditorComponent],
+  declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent, HandyScrollComponent, FroalaEditorComponent, AgGridComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SectionOneModule { }
