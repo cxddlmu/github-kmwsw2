@@ -13,6 +13,10 @@ import { HandyScrollComponent } from './handy-scroll/handy-scroll.component';
 import { FroalaEditorComponent } from './froala-editor/froala-editor.component';
 import { FroalaEditorModule } from 'angular-froala-wysiwyg/editor/editor.module.js';
 import { FroalaViewModule } from 'angular-froala-wysiwyg/view/view.module.js';
+
+import { AgGridModule } from 'ag-grid-angular';
+
+
 const routes: Routes = [
 
   {
@@ -32,7 +36,7 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [
-    CommonModule,RouterModule.forChild(routes),SharedModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
+    CommonModule,RouterModule.forChild(routes),SharedModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),AgGridModule.withComponents([])
   ],
   declarations: [SectionOneComponent, LozadComponent, PhotoviewerComponent, EditorJSComponent, CleavejsComponent, CssDoodleComponent, HandyScrollComponent, FroalaEditorComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
