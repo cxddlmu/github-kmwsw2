@@ -31,6 +31,7 @@ const routes: Routes = [
        { path: 'cssDoodle', component: CssDoodleComponent },
        { path: 'handyScroll', component: HandyScrollComponent },
        { path: 'froalaEditor', component: FroalaEditorComponent },
+       { path: 'agGrid', component: AgGridComponent },
     ]
   },
   
