@@ -33,6 +33,7 @@ const routes: Routes = [
        { path: 'handyScroll', component: HandyScrollComponent },
        { path: 'froalaEditor', component: FroalaEditorComponent },
        { path: 'agGrid', component: AgGridComponent },
+       { path: 'fuse', component: FuseComponent },
     ]
   },
   
