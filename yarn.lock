@@ -251,7 +251,7 @@
   dependencies:
     "@antv/util" "~1.3.1"
 
-"@antv/g2@^3.5.11":
+"@antv/g2@3.5.11":
   version "3.5.11"
   resolved "https://registry.npm.taobao.org/@antv/g2/download/@antv/g2-3.5.11.tgz#bd17f4911618671f115a249af410d3bb1c932e5e"
   integrity sha1-vRf0kRYYZx8RWiSa9BDTuxyTLl4=
@@ -385,6 +385,24 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@editorjs/editorjs@2.16.1":
+  version "2.16.1"
+  resolved "https://registry.npm.taobao.org/@editorjs/editorjs/download/@editorjs/editorjs-2.16.1.tgz#41a2707fc126518dca513a09aa207aa8b6d9a65c"
+  integrity sha1-QaJwf8EmUY3KUToJqiB6qLbZplw=
+  dependencies:
+    codex-notifier "^1.1.2"
+    codex-tooltip "^1.0.0"
+
+"@editorjs/header@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npm.taobao.org/@editorjs/header/download/@editorjs/header-2.3.2.tgz#419b24196ce7142c0ae8bac837e6b5f68977dc8f"
+  integrity sha1-QZskGWznFCwK6LrIN+a19ol33I8=
+
+"@editorjs/list@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/@editorjs/list/download/@editorjs/list-1.4.0.tgz#e92459a8ac2305bc4385245e329c8b5c8437456a"
+  integrity sha1-6SRZqKwjBbxDhSReMpyLXIQ3RWo=
+
 "@ngtools/webpack@7.0.7":
   version "7.0.7"
   resolved "https://registry.npm.taobao.org/@ngtools/webpack/download/@ngtools/webpack-7.0.7.tgz#0cd933534a878f25f69448435302c82a861096a6"
@@ -396,14 +414,14 @@
     tree-kill "1.2.0"
     webpack-sources "1.2.0"
 
-"@ngx-translate/core@^11.0.1":
+"@ngx-translate/core@11.0.1":
   version "11.0.1"
   resolved "https://registry.npm.taobao.org/@ngx-translate/core/download/@ngx-translate/core-11.0.1.tgz#cecefad41f06368f5859dac48fec8fcc4485615f"
   integrity sha1-zs761B8GNo9YWdrEj+yPzESFYV8=
   dependencies:
     tslib "^1.9.0"
 
-"@ngx-translate/http-loader@^4.0.0":
+"@ngx-translate/http-loader@4.0.0":
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/@ngx-translate/http-loader/download/@ngx-translate/http-loader-4.0.0.tgz#8a555248ad4b7d513460fcec9da25b0447962f1d"
   integrity sha1-ilVSSK1LfVE0YPzsnaJbBEeWLx0=
@@ -655,6 +673,16 @@ after@0.8.2:
   resolved "https://registry.npm.taobao.org/after/download/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
   integrity sha1-/ts5T58OAqqXaOcCvaI7UF+ufh8=
 
+ag-grid-angular@^22.1.1:
+  version "22.1.1"
+  resolved "https://registry.npm.taobao.org/ag-grid-angular/download/ag-grid-angular-22.1.1.tgz#a91ae2d846b0df217d59abfa67db8621bec82385"
+  integrity sha1-qRri2Eaw3yF9Wav6Z9uGIb7II4U=
+
+ag-grid-community@^22.1.1:
+  version "22.1.1"
+  resolved "https://registry.npm.taobao.org/ag-grid-community/download/ag-grid-community-22.1.1.tgz#279d0b4a3ab199dc647714add0d2d393a75315cb"
+  integrity sha1-J50LSjqxmdxkdxSt0NLTk6dTFcs=
+
 agent-base@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npm.taobao.org/agent-base/download/agent-base-4.3.0.tgz#8165f01c436009bccad0b1d122f05ed770efc6ee"
@@ -715,6 +743,13 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/amdefine/download/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
+
+angular-froala-wysiwyg@3.0.6:
+  version "3.0.6"
+  resolved "https://registry.npm.taobao.org/angular-froala-wysiwyg/download/angular-froala-wysiwyg-3.0.6.tgz#240c49ecfdd8ec0692ee05d5e9a6471f805974d5"
+  integrity sha1-JAxJ7P3Y7AaS7gXV6aZHH4BZdNU=
+  dependencies:
+    froala-editor "^3.0.6"
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -1624,6 +1659,11 @@ clean-css@4.2.1:
   dependencies:
     source-map "~0.6.0"
 
+cleave.js@1.5.3:
+  version "1.5.3"
+  resolved "https://registry.npm.taobao.org/cleave.js/download/cleave.js-1.5.3.tgz#1ef36e1375dea289bffeefe8ebb1e3ef2ee23240"
+  integrity sha1-HvNuE3Xeoom//u/o67Hj7y7iMkA=
+
 cli-cursor@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/cli-cursor/download/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
@@ -1699,6 +1739,16 @@ codelyzer@~4.5.0:
     semver-dsl "^1.0.1"
     source-map "^0.5.7"
     sprintf-js "^1.1.1"
+
+codex-notifier@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npm.taobao.org/codex-notifier/download/codex-notifier-1.1.2.tgz#a733079185f4c927fa296f1d71eb8753fe080895"
+  integrity sha1-pzMHkYX0ySf6KW8dceuHU/4ICJU=
+
+codex-tooltip@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/codex-tooltip/download/codex-tooltip-1.0.0.tgz#720353b27fadc40f2d054d171479b016ffcb63ea"
+  integrity sha1-cgNTsn+txA8tBU0XFHmwFv/LY+o=
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -2014,6 +2064,11 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+css-doodle@0.7.7:
+  version "0.7.7"
+  resolved "https://registry.npm.taobao.org/css-doodle/download/css-doodle-0.7.7.tgz#df9b8fe8d7df0806fba065bdd033a472c45d1454"
+  integrity sha1-35uP6NffCAb7oGW90DOkcsRdFFQ=
 
 css-parse@1.7.x:
   version "1.7.0"
@@ -2377,6 +2432,11 @@ domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/domain-browser/download/domain-browser-1.2.0.tgz?cache=0&sync_timestamp=1575879334171&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdomain-browser%2Fdownload%2Fdomain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
   integrity sha1-PTH1AZGmdJ3RN1p/Ui6CPULlTto=
+
+domq.js@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.npm.taobao.org/domq.js/download/domq.js-0.6.2.tgz#01d52b92ee9b222180d34a2ebcc9d5f5927d4a3f"
+  integrity sha1-AdUrku6bIiGA00ouvMnV9ZJ9Sj8=
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.7.1"
@@ -2912,7 +2972,32 @@ filename-regex@^2.0.0:
   resolved "https://registry.npm.taobao.org/filename-regex/download/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
   integrity sha1-wcS5vuPglyXdsQa3XB4wH+LxiyY=
 
-filepond@^4.9.2:
+filepond-plugin-file-encode@2.1.4:
+  version "2.1.4"
+  resolved "https://registry.npm.taobao.org/filepond-plugin-file-encode/download/filepond-plugin-file-encode-2.1.4.tgz#18c900ed372f69f028795671a911db9b7f08f9b8"
+  integrity sha1-GMkA7TcvafAoeVZxqRHbm38I+bg=
+
+filepond-plugin-file-poster@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npm.taobao.org/filepond-plugin-file-poster/download/filepond-plugin-file-poster-2.2.0.tgz#3c5c72a6a18d30974721e32201008a31961147e3"
+  integrity sha1-PFxypqGNMJdHIeMiAQCKMZYRR+M=
+
+filepond-plugin-file-rename@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/filepond-plugin-file-rename/download/filepond-plugin-file-rename-1.1.4.tgz#6b4de094fd638cae1c62cf080ea7c695e22c1cbf"
+  integrity sha1-a03glP1jjK4cYs8IDqfGleIsHL8=
+
+filepond-plugin-image-exif-orientation@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.npm.taobao.org/filepond-plugin-image-exif-orientation/download/filepond-plugin-image-exif-orientation-1.0.6.tgz#75920935a5da298884718bfd454f03362ad783e8"
+  integrity sha1-dZIJNaXaKYiEcYv9RU8DNirXg+g=
+
+filepond-plugin-image-preview@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npm.taobao.org/filepond-plugin-image-preview/download/filepond-plugin-image-preview-4.5.0.tgz#44bccdf1245c64437217db0e41ef1655e56a3c55"
+  integrity sha1-RLzN8SRcZENyF9sOQe8WVeVqPFU=
+
+filepond@4.9.2:
   version "4.9.2"
   resolved "https://registry.npm.taobao.org/filepond/download/filepond-4.9.2.tgz#306fec5312e72fb4055943d7f05f8a75442d8766"
   integrity sha1-MG/sUxLnL7QFWUPX8F+KdUQth2Y=
@@ -3087,6 +3172,11 @@ fresh@0.5.2:
   resolved "https://registry.npm.taobao.org/fresh/download/fresh-0.5.2.tgz?cache=0&sync_timestamp=1572571377988&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffresh%2Fdownload%2Ffresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
   integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
 
+froala-editor@^3.0.6:
+  version "3.1.0"
+  resolved "https://registry.npm.taobao.org/froala-editor/download/froala-editor-3.1.0.tgz#d05922abad32ae14a4bd5424a7451636554c5892"
+  integrity sha1-0Fkiq60yrhSkvVQkp0UWNlVMWJI=
+
 from2@^2.1.0:
   version "2.3.0"
   resolved "https://registry.npm.taobao.org/from2/download/from2-2.3.0.tgz#8bfb5502bde4a4d36cfdeea007fcca21d7e382af"
@@ -3146,6 +3236,11 @@ function-bind@^1.1.1, function-bind@~1.1.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/function-bind/download/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=
+
+fuse.js@^3.4.6:
+  version "3.4.6"
+  resolved "https://registry.npm.taobao.org/fuse.js/download/fuse.js-3.4.6.tgz#545c3411fed88bf2e27c457cab6e73e7af697a45"
+  integrity sha1-VFw0Ef7Yi/LifEV8q25z569pekU=
 
 gauge@~2.7.3:
   version "2.7.4"
@@ -3346,6 +3441,11 @@ handlebars@^4.0.1, handlebars@^4.1.2:
     source-map "^0.6.1"
   optionalDependencies:
     uglify-js "^3.1.4"
+
+handy-scroll@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/handy-scroll/download/handy-scroll-1.0.5.tgz#d6dd224a2eb696cd14e4e240b90bff9d0b63bf26"
+  integrity sha1-1t0iSi62ls0U5OJAuQv/nQtjvyY=
 
 har-schema@^2.0.0:
   version "2.0.0"
@@ -4619,6 +4719,11 @@ loud-rejection@^1.0.0, loud-rejection@^1.6.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
+lozad@1.14.0:
+  version "1.14.0"
+  resolved "https://registry.npm.taobao.org/lozad/download/lozad-1.14.0.tgz#91d51d57e53187e95c5b7f4029d7a28a0e940e10"
+  integrity sha1-kdUdV+Uxh+lcW39AKdeiig6UDhA=
+
 lru-cache@2.2.x:
   version "2.2.4"
   resolved "https://registry.npm.taobao.org/lru-cache/download/lru-cache-2.2.4.tgz#6c658619becf14031d0d0b594b16042ce4dc063d"
@@ -5057,7 +5162,7 @@ ng-zorro-antd@8.5.2:
     date-fns "^1.30.1"
     tslib "^1.9.0"
 
-ngx-filepond@^5.0.1:
+ngx-filepond@5.0.1:
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/ngx-filepond/download/ngx-filepond-5.0.1.tgz#0b6797be56e4382aa37b301fcb524f90b74f2035"
   integrity sha1-C2eXvlbkOCqjezAfy1JPkLdPIDU=
@@ -5724,6 +5829,13 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/performance-now/download/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+
+photoviewer@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.npm.taobao.org/photoviewer/download/photoviewer-3.4.0.tgz#7a1c78f573cb32a517be2d4ef8432cedd8225115"
+  integrity sha1-ehx49XPLMqUXvi1O+EMs7dgiURU=
+  dependencies:
+    domq.js "^0.6.2"
 
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
@@ -7526,10 +7638,15 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.1.6, typescript@~3.1.1:
+typescript@3.1.6:
   version "3.1.6"
   resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
   integrity sha1-tlQ6g8/Iwr77P0yPumiW9bDJvmg=
+
+typescript@^3.7.2:
+  version "3.7.5"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
+  integrity sha1-BpLiH2X9QQi5MwI4qsEd0uF3oa4=
 
 uglify-es@^3.3.4:
   version "3.3.9"
