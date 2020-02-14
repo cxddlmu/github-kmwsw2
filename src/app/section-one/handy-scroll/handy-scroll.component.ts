@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import * as handyScroll from "handy-scroll";
+import handyScroll from "handy-scroll";
 @Component({
   selector: "app-handy-scroll",
   templateUrl: "./handy-scroll.component.html",
@@ -9,7 +9,6 @@ export class HandyScrollComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    
 
   }
   ngAfterViewInit(){

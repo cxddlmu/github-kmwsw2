@@ -24,4 +24,4 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
      providers   : [ { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons } ],
 
 })
-export class SharedModule { }
+export class SharedModule { } 

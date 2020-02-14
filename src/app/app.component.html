@@ -1,6 +1,10 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19z" fill="rgba(231,76,60,1)"/></svg></div>
+    <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
+        <path fill="none" d="M0 0h24v24H0z" />
+        <path
+          d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19z"
+          fill="rgba(231,76,60,1)" /></svg></div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-menu-item [routerLink]="['/main']" routerLinkActive="active">
         <i nz-icon nzType="file"></i>
@@ -8,7 +12,7 @@
       </li>
       <li nz-submenu nzTitle="Image" nzIcon="user">
         <ul>
-           <li nz-menu-item [routerLink]="['/fileUpload']" routerLinkActive="active">
+          <li nz-menu-item [routerLink]="['/fileUpload']" routerLinkActive="active">
             <i nz-icon nzType="file"></i>
             <span>filepond</span>
           </li>
@@ -17,21 +21,36 @@
         </ul>
       </li>
 
-      <li nz-submenu nzTitle="Section One" nzIcon="info-circle" >
+      <li nz-submenu nzTitle="Section One" nzIcon="info-circle">
         <ul>
 
- <li nz-menu-item [routerLink]="['/sectionOne/lozad']" routerLinkActive="active">Lozad</li>
+          <li nz-menu-item [routerLink]="['/sectionOne/lozad']" routerLinkActive="active">Lozad</li>
           <li nz-menu-item [routerLink]="['/sectionOne/photoviewer']" routerLinkActive="active">photoviewer</li>
           <li nz-menu-item [routerLink]="['/sectionOne/editorJS']" routerLinkActive="active">editorJS</li>
-           <li nz-menu-item [routerLink]="['/sectionOne/cleavejs']" routerLinkActive="active">cleavejs</li>
-        <li nz-menu-item [routerLink]="['/sectionOne/cssDoodle']" routerLinkActive="active">cssDoodle</li>
-         <li nz-menu-item [routerLink]="['/sectionOne/handyScroll']" routerLinkActive="active">handyScroll</li>
-         <li nz-menu-item [routerLink]="['/sectionOne/froalaEditor']" routerLinkActive="active">froalaEditor</li>
-         <li nz-menu-item [routerLink]="['/sectionOne/agGrid']" routerLinkActive="active">agGrid</li>
-         <li nz-menu-item [routerLink]="['/sectionOne/fuse']" routerLinkActive="active">fuse</li>
+          <li nz-menu-item [routerLink]="['/sectionOne/cleavejs']" routerLinkActive="active">cleavejs</li>
+          <li nz-menu-item [routerLink]="['/sectionOne/cssDoodle']" routerLinkActive="active">cssDoodle</li>
+          <li nz-menu-item [routerLink]="['/sectionOne/handyScroll']" routerLinkActive="active">handyScroll</li>
+          <li nz-menu-item [routerLink]="['/sectionOne/froalaEditor']" routerLinkActive="active">froalaEditor</li>
+          <li nz-menu-item [routerLink]="['/sectionOne/agGrid']" routerLinkActive="active">agGrid</li>
+          <li nz-menu-item [routerLink]="['/sectionOne/fuse']" routerLinkActive="active">fuse</li>
         </ul>
       </li>
-     
+      <li nz-submenu nzTitle="Section Two" nzIcon="info-circle">
+        <ul>
+
+          <li nz-menu-item [routerLink]="['/sectionTwo/changeDetection']" routerLinkActive="active">changeDetection</li>
+          <li nz-menu-item [routerLink]="['/sectionTwo/viewComponent']" routerLinkActive="active">viewComponent</li>
+          <li nz-menu-item [routerLink]="['/sectionTwo/overlayComponent']" routerLinkActive="active">OverlayComponent
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="cdk" nzIcon="info-circle">
+        <ul>
+          <li *ngFor="let item of cdkMenuList" nz-menu-item [routerLink]="item.routerLink" routerLinkActive="active">
+            {{item.routerName}}</li>
+
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -45,7 +64,7 @@
         <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
       <div class="inner-content" style="overflow:auto">
-          <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
     <nz-footer>Ant Design ©2019 Implement By Angular</nz-footer>

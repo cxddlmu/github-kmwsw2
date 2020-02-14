@@ -19,6 +19,14 @@ const routes: Routes = [
   {
     path: 'sectionOne',
     loadChildren: () => import('./section-one/section-one.module').then(m => m.SectionOneModule)
+  }, 
+   {
+    path: 'sectionTwo',
+    loadChildren: () => import('./section-two/section-two.module').then(m => m.SectionTwoModule)
+  },
+  {
+    path: 'cdk',
+    loadChildren: () => import('./cdk/cdk.module').then(m => m.CdkModule)
   },
 ];
 
