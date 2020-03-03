@@ -8,7 +8,7 @@ import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 })
 export class VirtualScrollComponent implements AfterViewInit{
 
-    @ViewChild('scrollComponent',{static:false})
+    @ViewChild('scrollComponent')
     private _scrollViewport: CdkVirtualScrollViewport;
 
     items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);

@@ -8,7 +8,7 @@ import {InteractivityChecker} from "@angular/cdk/a11y";
 })
 export class CdkInteractivityCheckerComponent implements OnInit {
 
-    @ViewChild('interactivityCheckerButton',{static:false}) button: ElementRef;
+    @ViewChild('interactivityCheckerButton') button: ElementRef;
     disable: boolean;
     visible: boolean;
     tabable: boolean;

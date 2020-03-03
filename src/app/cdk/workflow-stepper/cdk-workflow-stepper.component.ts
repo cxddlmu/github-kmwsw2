@@ -11,8 +11,8 @@ export class CdkWorkflowStepperComponent {
 
     name = 'Angular 5';
     form1 = new FormControl();
-    @ViewChild('stepper', { static: false }) stepper: CdkStepper;
-    @ViewChild('step1', { static: false }) step1: CdkStep;
-    @ViewChild('step2', { static: false }) step2: CdkStep;
+    @ViewChild('stepper') stepper: CdkStepper;
+    @ViewChild('step1') step1: CdkStep;
+    @ViewChild('step2') step2: CdkStep;
 
 }

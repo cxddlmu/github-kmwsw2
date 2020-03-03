@@ -7,9 +7,9 @@ import { EntryTestComponent } from './entry-test.component';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-  @ViewChild('vc', { read: ViewContainerRef, static: false }) vc: ViewContainerRef;// host view
-  @ViewChild('t1', { read: TemplateRef, static: false }) t1: TemplateRef<null>;// template view
-  @ViewChild('t2', { read: TemplateRef, static: false }) t2: TemplateRef<null>;
+  @ViewChild('vc', { read: ViewContainerRef }) vc: ViewContainerRef;// host view
+  @ViewChild('t1', { read: TemplateRef }) t1: TemplateRef<null>;// template view
+  @ViewChild('t2', { read: TemplateRef }) t2: TemplateRef<null>;
   view1: ViewRef;
   view2: ViewRef;
   viewContainer;

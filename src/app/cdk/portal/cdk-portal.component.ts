@@ -26,9 +26,9 @@ export class CdkPortalComponent implements AfterViewInit {
     // 获取到对应html里面所有添加了cdkPortal指令的元素的TemplatePortal
     @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<TemplatePortal<any>>;
     // 获取单个的cdkPortal指令的元素的TemplatePortal 【#templatePortal="cdkPortal"】
-    @ViewChild('templatePortal',{static:false}) divTemplatePortal: TemplatePortal<any>;
+    @ViewChild('templatePortal') divTemplatePortal: TemplatePortal<any>;
 
-    @ViewChild('outOfApp',{static:false}) templateOutOfApp: TemplateRef<any>;
+    @ViewChild('outOfApp') templateOutOfApp: TemplateRef<any>;
     private _domPortalOutletOutOfApp: DomPortalOutlet;
 
     selectedPortal;

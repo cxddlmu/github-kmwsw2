@@ -8,7 +8,7 @@ import {CdkDrag} from "@angular/cdk/drag-drop";
 })
 export class DragDropDropComponent implements AfterViewInit {
 
-    @ViewChild(CdkDrag,{static:false}) cdkDragDirective: CdkDrag;
+    @ViewChild(CdkDrag) cdkDragDirective: CdkDrag;
 
     constructor() {
     }
