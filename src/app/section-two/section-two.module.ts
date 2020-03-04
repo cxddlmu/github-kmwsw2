@@ -7,10 +7,10 @@ import { SharedModule } from '../shared/shared.module';
 import { BoxComponent } from './changeDetection/box.omponent';
 import { ViewComponent } from './view/view.component';
 import { EntryTestComponent } from './view/entry-test.component';
-import { OverlayComponent } from './overlay/overlay.component';
+// import { OverlayComponent } from './overlay/overlay.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
-import { OverlayPanelComponent } from './overlay/panel/overlay-panel.component';
+// import { OverlayPanelComponent } from './overlay/panel/overlay-panel.component';
 
 const routes: Routes = [
 
@@ -20,7 +20,7 @@ const routes: Routes = [
     children:[
        { path: 'changeDetection', component: ChangeDetectionComponent },
        { path: 'viewComponent', component: ViewComponent },
-       { path: 'overlayComponent', component: OverlayComponent },
+      //  { path: 'overlayComponent', component: OverlayComponent },
        
     ]
   },
@@ -31,7 +31,6 @@ const routes: Routes = [
     CommonModule,RouterModule.forChild(routes),SharedModule,OverlayModule,PortalModule
   ],
   declarations: [SectionTwoComponent, ChangeDetectionComponent,BoxComponent,ViewComponent,EntryTestComponent,
-    OverlayComponent,OverlayPanelComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents:[EntryTestComponent,OverlayPanelComponent]
