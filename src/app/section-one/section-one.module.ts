@@ -35,6 +35,7 @@ const routes: Routes = [
        { path: 'froalaEditor', component: FroalaEditorComponent },
        { path: 'agGrid', component: AgGridComponent },
        { path: 'fuse', component: FuseComponent },
+       { path: 'litHtml', component: LitHtmlComponent },
     ]
   },
   
