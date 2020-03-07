@@ -33,6 +33,6 @@ const routes: Routes = [
   declarations: [SectionTwoComponent, ChangeDetectionComponent,BoxComponent,ViewComponent,EntryTestComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents:[EntryTestComponent,OverlayPanelComponent]
+  entryComponents:[EntryTestComponent]
 })
 export class SectionTwoModule { }

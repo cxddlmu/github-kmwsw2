@@ -7,7 +7,7 @@ import { BoxComponent } from './box.omponent';
   styleUrls: ['./changeDetection.component.css']
 })
 export class ChangeDetectionComponent implements OnInit {
-
+  currentId
   currentBoxComponent: BoxComponent = null;
   boxes = [];
   offsetX;

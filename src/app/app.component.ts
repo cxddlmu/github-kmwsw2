@@ -69,7 +69,7 @@ export class AppComponent {
     },
 
   ]
-
+  isCollapsed
 }
 interface MenuRouter {
   routerLink: Array<string>;
