@@ -17,5 +17,5 @@ import {Component, TemplateRef, ViewChild} from '@angular/core';
     ]
 })
 export class ToolTipComponent {
-    @ViewChild('tooltip') tooltip: TemplateRef<any>;
+    @ViewChild('tooltip',{static:false}) tooltip: TemplateRef<any>;
 }

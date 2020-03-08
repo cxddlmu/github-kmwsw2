@@ -42,7 +42,7 @@ export class FileUploadComponent implements OnInit {
 
 
  
-  @ViewChild('myPond') myPond: any;
+  @ViewChild('myPond',{static:false}) myPond: any;
   ngOnInit(): void {
   }
   pondOptions = {

@@ -8,9 +8,9 @@ import {take} from "rxjs/operators";
     styleUrls: ['./cdk-text-field.component.less']
 })
 export class CdkTextFieldComponent implements OnDestroy, OnInit {
-    @ViewChild('autosize') autosize: CdkTextareaAutosize;
-    @ViewChild('first', { read: ElementRef }) firstName: ElementRef<HTMLElement>;
-    @ViewChild('last', { read: ElementRef }) lastName: ElementRef<HTMLElement>;
+    @ViewChild('autosize', { static:false}) autosize: CdkTextareaAutosize;
+    @ViewChild('first', { read: ElementRef ,static:false}) firstName: ElementRef<HTMLElement>;
+    @ViewChild('last', { read: ElementRef ,static:false}) lastName: ElementRef<HTMLElement>;
     firstNameAutofilled: boolean;
     lastNameAutofilled: boolean;
 

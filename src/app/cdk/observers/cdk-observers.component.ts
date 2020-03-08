@@ -8,7 +8,7 @@ import {ContentObserver} from '@angular/cdk/observers';
 })
 export class CdkObserversComponent implements AfterViewInit {
 
-    @ViewChild('observerSource')
+    @ViewChild('observerSource',{static:false})
     observerSource: ElementRef;
 
     content = 1;

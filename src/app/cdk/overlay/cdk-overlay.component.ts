@@ -19,10 +19,10 @@ export class CdkOverlayComponent {
     private _overlayTemplateRef: OverlayRef;
     private _overlayConnectRef: OverlayRef;
 
-    @ViewChild('overlayGlobalTemplate') templateGlobalPortals: TemplatePortalDirective;
-    @ViewChild('connectComponentOrigin') _overlayConnectComponentOrigin: ElementRef;
-    @ViewChild('connectTemplateOrigin') _overlayConnectTemplateOrigin: ElementRef;
-    @ViewChild('overlayConnectTemplate') _overlayOriginTemplateDirective: TemplatePortalDirective;
+    @ViewChild('overlayGlobalTemplate',{static:false}) templateGlobalPortals: TemplatePortalDirective;
+    @ViewChild('connectComponentOrigin',{static:false}) _overlayConnectComponentOrigin: ElementRef;
+    @ViewChild('connectTemplateOrigin',{static:false}) _overlayConnectTemplateOrigin: ElementRef;
+    @ViewChild('overlayConnectTemplate',{static:false}) _overlayOriginTemplateDirective: TemplatePortalDirective;
 
     constructor(public overlay: Overlay
         , public viewContainerRef: ViewContainerRef) {

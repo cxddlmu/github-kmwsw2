@@ -8,7 +8,7 @@ import {TemplatePortal} from '@angular/cdk/portal';
   styleUrls: ['./drag-drop-drag-dialog.component.less']
 })
 export class DragDropDragDialogComponent  implements AfterViewInit, OnDestroy {
-    @ViewChild(TemplateRef) _dialogTemplate: TemplateRef<any>;
+    @ViewChild(TemplateRef,{static:false}) _dialogTemplate: TemplateRef<any>;
     private _overlayRef: OverlayRef;
     private _portal: TemplatePortal;
 

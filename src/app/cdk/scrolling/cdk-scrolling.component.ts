@@ -8,7 +8,7 @@ import {CdkScrollable, ScrollDispatcher, ViewportRuler} from '@angular/cdk/overl
 })
 export class CdkScrollingComponent implements OnInit, AfterViewInit {
 
-    @ViewChild('scrollingParent')
+    @ViewChild('scrollingParent',{static:false})
     childDiv: ElementRef;
 
     constructor(private scrollDispatcher: ScrollDispatcher, private viewPortRuler: ViewportRuler) {

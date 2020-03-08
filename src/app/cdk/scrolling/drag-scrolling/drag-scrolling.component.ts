@@ -27,7 +27,7 @@ export class DragScrollingComponent implements AfterViewInit, OnDestroy {
 
     animationFrame: number | undefined;
 
-    @ViewChild('scrollEl')
+    @ViewChild('scrollEl',{static:false})
     scrollEl: ElementRef<HTMLElement>;
 
     @ViewChildren(CdkDrag)

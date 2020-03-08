@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import G2 from '@antv/g2';
+import * as G2 from '@antv/g2';
 
 @Component({
   selector: 'app-main',

@@ -28,7 +28,7 @@ export class BoxComponent implements AfterViewInit {
     @Input() box;
     @Input() selected;
 
-    @ViewChild('rect')
+    @ViewChild('rect',{static:false})
     set rect(value: ElementRef) {
         if (value) {
             value.nativeElement['BoxComponent'] = this;

@@ -22,7 +22,7 @@ import {DomPortalHost, TemplatePortal} from "@angular/cdk/portal";
 })
 export class PortalTemplateComponent implements OnInit {
 
-    @ViewChild('portalTemplate') testTemplate: TemplateRef<any>;
+    @ViewChild('portalTemplate',{static:false}) testTemplate: TemplateRef<any>;
 
     constructor(
         private elementRef: ElementRef,
