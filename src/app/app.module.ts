@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,23 +10,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AgGridModule } from 'ag-grid-angular';
-// import { FormRuleEngineComponent } from './form-rule-engine/form-rule-engine.component'
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-    // FormRuleEngineComponent
-  ],
-  imports: [
-    BrowserModule, FormsModule, HttpClientModule, HttpClientJsonpModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule, ScrollingModule, DragDropModule,
-    AppRoutingModule, SharedModule , AgGridModule.withComponents([])
-  ], 
-  exports: [
-
-  ],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+   ],
+   imports: [
+      BrowserModule,
+      FormsModule,
+      HttpClientModule,
+      HttpClientJsonpModule,
+      ReactiveFormsModule,
+      BrowserAnimationsModule,
+      ScrollingModule,
+      DragDropModule,
+      AppRoutingModule,
+      SharedModule,BrowserTransferStateModule
+   ],
+   exports: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }

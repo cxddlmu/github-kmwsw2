@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MainModule } from './main/main.module'
-import { FileUploadModule } from './file-upload/file-upload.module'
+// import { MainModule } from './main/main.module'
+// import { FileUploadModule } from './file-upload/file-upload.module'
 const routes: Routes = [
   {
     path: 'main',
@@ -27,6 +27,9 @@ const routes: Routes = [
   {
     path: 'cdk',
     loadChildren: () => import('./cdk/cdk.module').then(m => m.CdkModule)
+  },  {
+    path: 'youdao',
+    loadChildren: () => import('./youdao/youdao.module').then(m => m.YoudaoModule)
   },
 ];
 

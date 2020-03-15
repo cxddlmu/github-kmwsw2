@@ -10,6 +10,12 @@
         <i nz-icon nzType="file"></i>
         <span>main page</span>
       </li>
+      <li nz-submenu nzTitle="youdao" nzIcon="info-circle">
+        <ul>
+          <li *ngFor="let item of navList" nz-menu-item [routerLink]="item.routerLink" routerLinkActive="active">
+            {{item.routerName}}</li>
+        </ul>
+      </li>
       <li nz-submenu nzTitle="Image" nzIcon="user">
         <ul>
           <li nz-menu-item [routerLink]="['/fileUpload']" routerLinkActive="active">
@@ -33,8 +39,13 @@
           <li nz-menu-item [routerLink]="['/sectionOne/froalaEditor']" routerLinkActive="active">froalaEditor</li>
           <li nz-menu-item [routerLink]="['/sectionOne/agGrid']" routerLinkActive="active">agGrid</li>
           <li nz-menu-item [routerLink]="['/sectionOne/fuse']" routerLinkActive="active">fuse</li>
-           <li nz-menu-item [routerLink]="['/sectionOne/fuse']" routerLinkActive="active">fuse</li>
-          
+          <li nz-menu-item [routerLink]="['/sectionOne/litHtml']" routerLinkActive="active">litHtml</li>
+
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Section Three" nzIcon="info-circle">
+        <ul>
+
         </ul>
       </li>
       <li nz-submenu nzTitle="Section Two" nzIcon="info-circle">
@@ -42,7 +53,8 @@
 
           <li nz-menu-item [routerLink]="['/sectionTwo/changeDetection']" routerLinkActive="active">changeDetection</li>
           <li nz-menu-item [routerLink]="['/sectionTwo/viewComponent']" routerLinkActive="active">viewComponent</li>
-          <li nz-menu-item [routerLink]="['/sectionTwo/overlayComponent']" routerLinkActive="active">OverlayComponent
+          <li nz-menu-item [routerLink]="['/sectionTwo/tesseract']" routerLinkActive="active">tesseract
+          <li nz-menu-item [routerLink]="['/sectionTwo/filesaver']" routerLinkActive="active">filesaver
           </li>
         </ul>
       </li>

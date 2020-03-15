@@ -1,11 +1,30 @@
 import { Component } from '@angular/core';
-
+interface NavItem {
+  routerName: string;
+  routerLink: string;
+  icon: string;
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  navList: Array<NavItem> = [
+    {
+      routerName: '主页',
+      routerLink: '/youdao',
+      icon: 'home'
+    }, {
+      routerName: '搜索',
+      routerLink: '/youdao/search',
+      icon: 'search'
+    }, {
+      routerName: '翻译',
+      routerLink: '/youdao/translate',
+      icon: 'g_translate'
+    }
+  ];
   cdkMenuList: Array<MenuRouter> = [
     {
       routerLink: ["/cdk/coercion"],

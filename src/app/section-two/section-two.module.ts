@@ -10,6 +10,8 @@ import { EntryTestComponent } from './view/entry-test.component';
 // import { OverlayComponent } from './overlay/overlay.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { TesseractComponent } from './tesseract/tesseract.component';
+import { FileSaverComponent } from './file-saver/file-saver.component';
 // import { OverlayPanelComponent } from './overlay/panel/overlay-panel.component';
 
 const routes: Routes = [
@@ -17,22 +19,30 @@ const routes: Routes = [
   {
     path: '',
     component: SectionTwoComponent,
-    children:[
-       { path: 'changeDetection', component: ChangeDetectionComponent },
-       { path: 'viewComponent', component: ViewComponent },
+    children: [
+      { path: 'changeDetection', component: ChangeDetectionComponent },
+      { path: 'viewComponent', component: ViewComponent },
+      { path: 'tesseract', component: TesseractComponent },
+      { path: 'filesaver', component: FileSaverComponent },
       //  { path: 'overlayComponent', component: OverlayComponent },
-       
+
     ]
   },
-  
+
 ];
 @NgModule({
   imports: [
-    CommonModule,RouterModule.forChild(routes),SharedModule,OverlayModule,PortalModule
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    OverlayModule,
+    PortalModule
   ],
-  declarations: [SectionTwoComponent, ChangeDetectionComponent,BoxComponent,ViewComponent,EntryTestComponent,
+  declarations: [SectionTwoComponent,
+    ChangeDetectionComponent, BoxComponent,
+    ViewComponent, EntryTestComponent,TesseractComponent, FileSaverComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents:[EntryTestComponent]
+  entryComponents: [EntryTestComponent]
 })
 export class SectionTwoModule { }

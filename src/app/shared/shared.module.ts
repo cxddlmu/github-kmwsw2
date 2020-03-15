@@ -18,10 +18,10 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 
 @NgModule({
   imports: [
-    CommonModule,NgZorroAntdModule
+    CommonModule, NgZorroAntdModule
   ],
-  declarations: [SharedComponent],exports:[NgZorroAntdModule],
-     providers   : [ { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons } ],
+  declarations: [SharedComponent], exports: [NgZorroAntdModule],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
 
 })
 export class SharedModule { } 
