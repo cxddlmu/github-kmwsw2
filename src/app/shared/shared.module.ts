@@ -10,6 +10,7 @@ import en from '@angular/common/locales/en';
 import { ErrorHandlerComponent } from './error-handler/error-handler.component';
 
 import { InterceptorComponent } from './interceptor/interceptor.component';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 registerLocaleData(en);
 
@@ -20,7 +21,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 
 @NgModule({
   imports: [
-    CommonModule, NgZorroAntdModule
+    CommonModule, NgZorroAntdModule,SimplebarAngularModule
   ],
   declarations: [SharedComponent,InterceptorComponent,ErrorHandlerComponent], 
   exports: [NgZorroAntdModule],

@@ -12,6 +12,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { TesseractComponent } from './tesseract/tesseract.component';
 import { FileSaverComponent } from './file-saver/file-saver.component';
+import { SimplebarComponent } from './Simplebar/simplebar.component';
 // import { OverlayPanelComponent } from './overlay/panel/overlay-panel.component';
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
       { path: 'viewComponent', component: ViewComponent },
       { path: 'tesseract', component: TesseractComponent },
       { path: 'filesaver', component: FileSaverComponent },
-      //  { path: 'overlayComponent', component: OverlayComponent },
+       { path: 'simplebar', component: SimplebarComponent },
 
     ]
   },
@@ -40,7 +41,7 @@ const routes: Routes = [
   ],
   declarations: [SectionTwoComponent,
     ChangeDetectionComponent, BoxComponent,
-    ViewComponent, EntryTestComponent,TesseractComponent, FileSaverComponent
+    ViewComponent, EntryTestComponent,TesseractComponent, FileSaverComponent,SimplebarComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [EntryTestComponent]

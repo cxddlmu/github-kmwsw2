@@ -55,6 +55,8 @@
           <li nz-menu-item [routerLink]="['/sectionTwo/viewComponent']" routerLinkActive="active">viewComponent</li>
           <li nz-menu-item [routerLink]="['/sectionTwo/tesseract']" routerLinkActive="active">tesseract
           <li nz-menu-item [routerLink]="['/sectionTwo/filesaver']" routerLinkActive="active">filesaver
+<li nz-menu-item [routerLink]="['/sectionTwo/simplebar']" routerLinkActive="active">simplebar
+          
           </li>
         </ul>
       </li>
@@ -77,7 +79,7 @@
         <nz-breadcrumb-item>User</nz-breadcrumb-item>
         <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div class="inner-content" style="overflow:auto">
+      <div class="inner-content" style="overflow:auto;height: 100vh;">
         <router-outlet></router-outlet>
       </div>
     </nz-content>

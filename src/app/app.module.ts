@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AgGridModule } from 'ag-grid-angular';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { AgGridModule } from 'ag-grid-angular';
       ScrollingModule,
       DragDropModule,
       AppRoutingModule,
-      SharedModule,BrowserTransferStateModule
+      SharedModule,BrowserTransferStateModule,SimplebarAngularModule
    ],
    exports: [],
    bootstrap: [

@@ -5,8 +5,9 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
 @Component({
   selector: 'app-interceptor',
-  templateUrl: './interceptor.component.html',
+//   templateUrl: './interceptor.component.html',
   // styleUrls: ['./interceptor.component.css']
+  template:``
 })
 export class InterceptorComponent implements HttpInterceptor {
 
