@@ -8,7 +8,7 @@
 <div class="demo-portal-host">
     <!-- cdkPortalOutlet来指定动态内容需要放置的地方，参数是selectedPortal他是一个ComponentPortal或者TemplatePortal
      显示的内容会根据selectedPortal的改变而改变-->
-    <ng-template [cdkPortalHost]="selectedPortal" (attached)="onPortalAttached()"></ng-template>
+    <ng-template [cdkPortalOutlet]="selectedPortal" (attached)="onPortalAttached()"></ng-template>
 </div>
 <br>
 <button (click)="cdkPortalFirst()">

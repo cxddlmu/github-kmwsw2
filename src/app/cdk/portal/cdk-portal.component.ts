@@ -12,7 +12,7 @@ import {
     ViewChildren,
     ViewContainerRef
 } from '@angular/core';
-import {ComponentPortal, DomPortalOutlet, TemplatePortal, TemplatePortalDirective} from '@angular/cdk/portal';
+import {ComponentPortal, DomPortalOutlet, TemplatePortal, TemplatePortalDirective, CdkPortal} from '@angular/cdk/portal';
 import {PortalChildComponent} from './portal-child-component/portal-child.component';
 import {DOCUMENT} from '@angular/common';
 
@@ -24,7 +24,7 @@ import {DOCUMENT} from '@angular/common';
 export class CdkPortalComponent implements AfterViewInit {
 
     // 获取到对应html里面所有添加了cdkPortal指令的元素的TemplatePortal
-    @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<TemplatePortal<any>>;
+    @ViewChildren(CdkPortal) templatePortals: QueryList<TemplatePortal<any>>;
     // 获取单个的cdkPortal指令的元素的TemplatePortal 【#templatePortal="cdkPortal"】
     @ViewChild('templatePortal',{static:false}) divTemplatePortal: TemplatePortal<any>;
 
@@ -76,7 +76,9 @@ export class CdkPortalComponent implements AfterViewInit {
     }
 
     cdkPortalComponent() {
-        this.selectedPortal = new ComponentPortal(PortalChildComponent);
+        // this.selectedPortal = new ComponentPortal(PortalChildComponent);
+        this.selectedPortal = new ComponentPortal(PortalChildComponent
+            , this.viewContainerRef);
     }
 
     onPortalAttached() {
