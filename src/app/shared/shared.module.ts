@@ -7,7 +7,9 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { ErrorHandlerComponent } from './error-handler/error-handler.component';
 
+import { InterceptorComponent } from './interceptor/interceptor.component';
 
 registerLocaleData(en);
 
@@ -20,7 +22,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   imports: [
     CommonModule, NgZorroAntdModule
   ],
-  declarations: [SharedComponent], exports: [NgZorroAntdModule],
+  declarations: [SharedComponent,InterceptorComponent,ErrorHandlerComponent], 
+  exports: [NgZorroAntdModule],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
 
 })
